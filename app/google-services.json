@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "750683888227",
+    "project_id": "blinder-bc792",
+    "storage_bucket": "blinder-bc792.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750683888227:android:6ad1ff8bc6695b7815b656",
+        "android_client_info": {
+          "package_name": "es.iesnervion.jmmata.blinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750683888227-nkpfmgl9bqqldbtbhc1d7qk62apt9i8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9KeaJ5uNZMlvmhgTbOuslr-ts-J2YyEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750683888227-nkpfmgl9bqqldbtbhc1d7qk62apt9i8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dataaccess.fragments.NewLoginFragment"
+    android:background="@color/back_blinder">
+
+    <ImageView
+        android:id="@+id/newLoginImgIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintHeight_max="100dp"
+        android:src="@drawable/blinder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/blinder" />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/newLoginImgIcon"
+        app:layout_constraintBottom_toTopOf="@+id/newLoginButtonConfirm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp"
+        android:background="@color/back_light_blinder">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/newLoginLabelUsername"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/back_light_blinder"
+                    android:hint="Nombre"
+                    android:paddingTop="10dp"
+                    android:paddingHorizontal="20dp"
+                    android:textColorHint="@color/white_background"
+                    app:errorContentDescription="El campo debe estar relleno"
+                    app:errorEnabled="true"
+                    app:helperText="Obligatorio"
+                    app:helperTextTextColor="@color/white_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/newLoginEditUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/white_background" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/newLoginLabelEmail"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/back_light_blinder"
+                    android:hint="E-mail"
+                    android:paddingHorizontal="20dp"
+                    android:textColorHint="@color/white_background"
+                    app:errorContentDescription="El campo debe estar relleno"
+                    app:errorEnabled="true"
+                    app:helperText="Obligatorio"
+                    app:helperTextTextColor="@color/white_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/newLoginLabelUsername">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/newLoginEditEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/white_background" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/newLoginLabelPassword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/back_light_blinder"
+                    android:hint="@string/contrase_a"
+                    android:paddingHorizontal="20dp"
+                    android:textColorHint="@color/white_background"
+                    app:endIconMode="password_toggle"
+                    app:errorContentDescription="Introduzca valor en este campo"
+                    app:helperText="Obligatorio"
+                    app:helperTextTextColor="@color/white_background"
+                    app:layout_constraintTop_toBottomOf="@id/newLoginLabelEmail">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/newLoginEditPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:textColor="@color/white_background" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newLoginLabelRepeatPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/back_light_blinder"
+                android:hint="Repetir contraseña"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="@color/browser_actions_bg_grey"
+                app:endIconMode="password_toggle"
+                app:errorContentDescription="Introduzca valor en este campo"
+                app:helperText="Obligatorio"
+                app:helperTextTextColor="@color/white_background"
+                app:layout_constraintTop_toBottomOf="@id/newLoginLabelPassword">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newLoginEditRepeatPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/white_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newLoginLabelBirthdate"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/back_light_blinder"
+                android:hint="Fecha de nacimiento"
+                android:paddingHorizontal="20dp"
+
+                android:textColorHint="@color/browser_actions_bg_grey"
+                app:errorContentDescription="Introduzca valor en este campo"
+                app:helperText="Obligatorio"
+                app:helperTextTextColor="@color/white_background"
+                app:layout_constraintTop_toBottomOf="@id/newLoginLabelRepeatPassword">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newLoginEditBirthdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/white_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newLoginLabelDescription"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/back_light_blinder"
+                android:hint="Description"
+                android:paddingHorizontal="20dp"
+                android:textColorHint="@color/white_background"
+                app:errorContentDescription="El campo debe estar relleno"
+                app:errorEnabled="true"
+                app:helperTextTextColor="@color/white_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/newLoginLabelBirthdate">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newLoginEditDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:inputType="textCapCharacters|textLongMessage"
+                    android:verticalScrollbarPosition="left"
+                    android:textColor="@color/white_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+        <Button
+            android:id="@id/newLoginButtonConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:textColor="@color/white_background"
+            android:backgroundTint="@color/back_light_blinder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
