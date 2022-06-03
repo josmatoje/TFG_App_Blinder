@@ -51,16 +51,17 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>() {
         val mainActivity = requireActivity() as MainActivity
         mainActivity.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility= View.VISIBLE
         if(auth.uid == args.tokenLoged){
-            var user: UserDBO? = null
-            db.collection("Users")
+            var userObject: UserDBO? = null
+            val dataUser = db.collection("Users")
             .document(auth.uid.toString())
-            .get()
+            /*Log.d("usiario", dataUser.toString())
+            dataUser.get()
             .addOnCompleteListener { doc ->
-                user = doc.result.toObject<UserDBO>()
-            }
+                userObject = doc.result.toObject<UserDBO>()
+            }*/
 
-            var userBO = user?.toUserBO() ?: UserBO()
-            setText (userBO)
+            var userBO = userObject?.toUserBO() ?: UserBO()
+            //setText (userBO)
         }
     }
 
