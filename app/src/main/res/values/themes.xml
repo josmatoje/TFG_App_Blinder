@@ -2,9 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.Blinder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/back_blinder</item>
+        <item name="colorPrimary">@color/back_highlight_blinder</item>
+        <item name="colorOnSurface">@color/back_dark_blinder</item>
         <item name="colorPrimaryVariant">@color/blinder_variant</item>
-        <item name="colorOnPrimary">@color/back_light_blinder</item>
+        <item name="colorOnPrimary">@color/white_background</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>

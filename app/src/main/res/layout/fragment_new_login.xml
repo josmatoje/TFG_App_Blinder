@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dataaccess.fragments.NewLoginFragment"
+    tools:context=".view.fragments.NewLoginFragment"
     android:background="@color/back_blinder">
 
     <ImageView
@@ -110,76 +110,78 @@
                         android:textColor="@color/white_background" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/newLoginLabelRepeatPassword"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/back_light_blinder"
-                android:hint="Repetir contraseña"
-                android:paddingHorizontal="20dp"
-                android:textColorHint="@color/browser_actions_bg_grey"
-                app:endIconMode="password_toggle"
-                app:errorContentDescription="Introduzca valor en este campo"
-                app:helperText="Obligatorio"
-                app:helperTextTextColor="@color/white_background"
-                app:layout_constraintTop_toBottomOf="@id/newLoginLabelPassword">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/newLoginEditRepeatPassword"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/newLoginLabelRepeatPassword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:textColor="@color/white_background" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:background="@color/back_light_blinder"
+                    android:hint="Repetir contraseña"
+                    android:paddingHorizontal="20dp"
+                    android:textColorHint="@color/browser_actions_bg_grey"
+                    app:endIconMode="password_toggle"
+                    app:errorContentDescription="Introduzca valor en este campo"
+                    app:helperText="Obligatorio"
+                    app:helperTextTextColor="@color/white_background"
+                    app:layout_constraintTop_toBottomOf="@id/newLoginLabelPassword">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/newLoginLabelBirthdate"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/back_light_blinder"
-                android:hint="Fecha de nacimiento"
-                android:paddingHorizontal="20dp"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/newLoginEditRepeatPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:textColor="@color/white_background" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                android:textColorHint="@color/browser_actions_bg_grey"
-                app:errorContentDescription="Introduzca valor en este campo"
-                app:helperText="Obligatorio"
-                app:helperTextTextColor="@color/white_background"
-                app:layout_constraintTop_toBottomOf="@id/newLoginLabelRepeatPassword">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/newLoginEditBirthdate"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/newLoginLabelBirthdate"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:textColor="@color/white_background" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:background="@color/back_light_blinder"
+                    android:hint="Fecha de nacimiento"
+                    android:paddingHorizontal="20dp"
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/newLoginLabelDescription"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/back_light_blinder"
-                android:hint="Description"
-                android:paddingHorizontal="20dp"
-                android:textColorHint="@color/white_background"
-                app:errorContentDescription="El campo debe estar relleno"
-                app:errorEnabled="true"
-                app:helperTextTextColor="@color/white_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/newLoginLabelBirthdate">
+                    android:textColorHint="@color/browser_actions_bg_grey"
+                    app:errorContentDescription="Introduzca valor en este campo"
+                    app:helperText="Obligatorio"
+                    app:helperTextTextColor="@color/white_background"
+                    app:layout_constraintTop_toBottomOf="@id/newLoginLabelRepeatPassword">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/newLoginEditDescription"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/newLoginEditBirthdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:textColor="@color/white_background" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/newLoginLabelDescription"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:inputType="textCapCharacters|textLongMessage"
-                    android:verticalScrollbarPosition="left"
-                    android:textColor="@color/white_background" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:background="@color/back_light_blinder"
+                    android:hint="Description"
+                    android:paddingHorizontal="20dp"
+                    android:textColorHint="@color/white_background"
+                    app:errorContentDescription="El campo debe estar relleno"
+                    app:errorEnabled="true"
+                    app:helperTextTextColor="@color/white_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/newLoginLabelBirthdate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/newLoginEditDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:inputType="textCapCharacters|textLongMessage"
+                        android:verticalScrollbarPosition="left"
+                        android:textColor="@color/white_background" />
+                </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

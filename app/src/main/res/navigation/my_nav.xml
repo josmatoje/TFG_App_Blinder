@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_Login"
-        android:name="es.iesnervion.jmmata.blinder.dataaccess.fragments.LoginFragment"
+        android:name="es.iesnervion.jmmata.blinder.view.fragments.LoginFragment"
         android:label="fragment__login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/newLoginFragment"
-        android:name="es.iesnervion.jmmata.blinder.dataaccess.fragments.NewLoginFragment"
+        android:name="es.iesnervion.jmmata.blinder.view.fragments.NewLoginFragment"
         android:label="fragment_new_login"
         tools:layout="@layout/fragment_new_login" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/peopleFragment"
-        android:name="es.iesnervion.jmmata.blinder.dataaccess.fragments.PeopleFragment"
+        android:name="es.iesnervion.jmmata.blinder.view.fragments.PeopleFragment"
         android:label="fragment_people"
         tools:layout="@layout/fragment_people" >
         <argument
@@ -36,4 +36,9 @@
             app:argType="string"
             android:defaultValue="SDOS" />
     </fragment>
+    <fragment
+        android:id="@+id/friendsFragment"
+        android:name="es.iesnervion.jmmata.blinder.view.fragments.FriendsFragment"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_friends" />
 </navigation>
