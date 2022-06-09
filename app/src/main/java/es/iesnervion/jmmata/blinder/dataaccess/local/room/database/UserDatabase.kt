@@ -9,13 +9,11 @@ import es.iesnervion.jmmata.blinder.dataaccess.converters.RoomDateConverter
 import es.iesnervion.jmmata.blinder.dataaccess.converters.RoomListConverter
 import es.iesnervion.jmmata.blinder.dataaccess.local.room.dao.UserDao
 import es.iesnervion.jmmata.blinder.dataaccess.local.room.dbo.UserDBO
-import es.iesnervion.jmmata.blinder.dataaccess.local.room.dbo.UserCrossRefDBO
 
 @Database( entities = [
-    UserDBO::class,
-    UserCrossRefDBO::class],
+    UserDBO::class],
     exportSchema = false,
-    version = 3)
+    version = 4)
 @TypeConverters(RoomDateConverter::class, RoomListConverter::class)
 abstract class UserDatabase: RoomDatabase() {
 

@@ -48,6 +48,9 @@ dependencies {
     //Material Designe
     implementation 'com.google.android.material:material:1.7.0-alpha01'
 
+    //Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1-native-mt")
+
     //Room
     implementation("androidx.room:room-runtime:2.4.2")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -80,9 +83,9 @@ dependencies {
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+    //Location
+    implementation("com.google.android.gms:play-services-location:19.0.1")
 
-    // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:30.0.0')
 
     // When using the BoM, you don't specify versions in Firebase library dependencies
 
@@ -92,8 +95,9 @@ dependencies {
     // Declare the dependencies for any other desired Firebase products
     // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
     implementation 'com.google.firebase:firebase-auth-ktx'
-
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.firebase:geofire-android-common:3.1.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:30.1.0')

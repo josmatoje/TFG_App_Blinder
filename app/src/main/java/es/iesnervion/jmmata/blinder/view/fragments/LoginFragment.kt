@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -13,11 +14,13 @@ import es.iesnervion.jmmata.blinder.MainActivity
 import es.iesnervion.jmmata.blinder.R
 import es.iesnervion.jmmata.blinder.view.base.BaseFragment
 import es.iesnervion.jmmata.blinder.databinding.FragmentLoginBinding
+import es.iesnervion.jmmata.blinder.viewmodels.LoginVM
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private val navController:NavController by lazy { findNavController() }
     private lateinit var auth: FirebaseAuth
+    private val viewModel: LoginVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,11 +57,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 }
             }
             forgetPassword.setOnClickListener {
-                //TODO: if email null mensaje de aviso, no hay ningun coreo escrito
                 binding?.etName?.text.toString().let {
-                    forgotPassword(it)
+                    if(it.isEmpty()){
+                        Toast.makeText(context, "Introduzca una dirección de correo", Toast.LENGTH_SHORT).show()
+                    }else {
+                        forgotPassword(it)
+                    }
                 }
-
             }
         }
     }
@@ -67,13 +72,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    user?.apply{
-                        auth.uid?.let {
-                            navController.navigate(
-                                LoginFragmentDirections.navigateToPeopleFragment(it)
-                            )
-                        }
+                    auth.uid?.let {
+                        //viewModel.loadLocalDatasFrom()
+                        navController.navigate(LoginFragmentDirections.navigateToPeopleFragment(it))
                     }
                 } else {
                     binding?.errorMessage?.visibility = View.VISIBLE
@@ -96,14 +97,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private fun sendEmailVerification() {
         val user = auth.currentUser
         user?.sendEmailVerification()
-            ?.addOnCompleteListener { task ->
+            ?.addOnCompleteListener {
                 Toast.makeText(context, "Correo enviado, compruebe su bandeja de entrada.", Toast.LENGTH_LONG).show()
             }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = LoginFragment()
     }
 
     override fun inflateViewBinding(

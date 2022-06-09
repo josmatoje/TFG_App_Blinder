@@ -1,13 +1,11 @@
 package es.iesnervion.jmmata.blinder.view.fragments
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.DEBUG
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -17,52 +15,30 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.google.type.DateTime
-import es.iesnervion.jmmata.blinder.BuildConfig.DEBUG
 import es.iesnervion.jmmata.blinder.MainActivity
 import es.iesnervion.jmmata.blinder.R
 import es.iesnervion.jmmata.blinder.businessObject.UserBO
 import es.iesnervion.jmmata.blinder.dataaccess.local.room.dbo.UserDBO
 import es.iesnervion.jmmata.blinder.dataaccess.local.toUserBO
-import es.iesnervion.jmmata.blinder.dataaccess.repository.UsersRepository
-import es.iesnervion.jmmata.blinder.dataaccess.useCase.GetUserByIdUseCase
+import es.iesnervion.jmmata.blinder.dataaccess.remote.firebase.dto.UserDTO
+import es.iesnervion.jmmata.blinder.dataaccess.remote.toUserBO
 import es.iesnervion.jmmata.blinder.view.base.BaseFragment
 import es.iesnervion.jmmata.blinder.databinding.FragmentPeopleBinding
-import java.time.LocalDate
-import java.time.Period
-import java.util.*
+import es.iesnervion.jmmata.blinder.viewmodels.PeopleVM
+import kotlin.collections.ArrayList
 
 class PeopleFragment : BaseFragment<FragmentPeopleBinding>() {
 
+    //private variables
     private val navController: NavController by lazy { findNavController() }
-    private lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth= Firebase.auth
     private val db = Firebase.firestore
     private val args: PeopleFragmentArgs by navArgs() //Argument from another fragment
+    private val viewModel: PeopleVM by activityViewModels()
 
-
+    //life cycle functions
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Initialize Firebase Auth
-        auth = Firebase.auth
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val mainActivity = requireActivity() as MainActivity
-        mainActivity.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility= View.VISIBLE
-        if(auth.uid == args.tokenLoged){
-            var userObject: UserDBO? = null
-            val dataUser = db.collection("Users")
-            .document(auth.uid.toString())
-            /*Log.d("usiario", dataUser.toString())
-            dataUser.get()
-            .addOnCompleteListener { doc ->
-                userObject = doc.result.toObject<UserDBO>()
-            }*/
-
-            var userBO = userObject?.toUserBO() ?: UserBO()
-            //setText (userBO)
-        }
     }
 
     override fun onCreateView(
@@ -76,27 +52,49 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    private fun setText(userLoged: UserBO) {
-        binding?.apply {
-            peopleLabelName.text = userLoged.name
-            peopleLabelCity.text = "Vive en, " + userLoged.city
-            peopleLabelAge.text = "27"
-            tagGustos.text = userLoged.likes[0]
-            tagGustos1.text = userLoged.likes[1]
-            tagGustos2.text = userLoged.likes[2]
-            peopleLabelDescription.text = userLoged.description
+        setupVMObservers()
+        binding?.peopleMatbtnDislike?.setOnClickListener {
+            viewModel.isAMatch(false)
         }
+        binding?.peopleMatbtnLike?.setOnClickListener {
+            viewModel.isAMatch(true)
+        }
+        viewModel.loadUser()
     }
 
+    override fun onStart() {
+        super.onStart()
+        val mainActivity = requireActivity() as MainActivity
+        mainActivity.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility= View.VISIBLE
+    }
+
+    //Inflater
     override fun inflateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentPeopleBinding = FragmentPeopleBinding.inflate(inflater, container, false)
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = PeopleFragment()
+    //private methods
+    private fun setupVMObservers() {
+        viewModel.userPresented.observe(viewLifecycleOwner) {
+            setText(it)
+        }
     }
+
+    private fun setText(user: UserBO) {
+        binding?.apply {
+
+            peopleLabelName.text = user.name
+            peopleLabelCity.text = "Vive en, " + user.city
+            peopleLabelAge.text = "27" //TODO: poner edad real
+            tagGustos.text = if(user.likes.isNotEmpty()) user.likes[0] else ""
+            tagGustos1.text = if(user.likes.size > 1) user.likes[1] else ""
+            tagGustos2.text = if(user.likes.size > 2) user.likes[2] else ""
+            tagGustos3.text = if(user.likes.size > 3) user.likes[3] else ""
+            tagGustos4.text = if(user.likes.size > 4) user.likes[4] else ""
+            peopleLabelDescription.text = user.description
+        }
+
+    }
+
 }

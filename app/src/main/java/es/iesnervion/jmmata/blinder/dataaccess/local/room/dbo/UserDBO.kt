@@ -17,5 +17,6 @@ data class UserDBO (
     val latitude: Double?,
     val longitude : Double?,
     val likes: List<String>?,
-    val friends: List<String>?
+    val sexuality: String?,
+    val gender: String?
 )

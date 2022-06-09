@@ -9,17 +9,22 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import es.iesnervion.jmmata.blinder.businessObject.FriendBO
 import es.iesnervion.jmmata.blinder.view.base.BaseFragment
 import es.iesnervion.jmmata.blinder.databinding.FragmentFriendsBinding
+import es.iesnervion.jmmata.blinder.view.adapters.FriendAdapter
 
 class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
 
+    //Variables
     private val navController: NavController by lazy { findNavController() }
-    private lateinit var auth: FirebaseAuth
+    private val auth: FirebaseAuth = Firebase.auth
+    private val adapter= FriendAdapter(onFriendSelectedListener = { onFriendClicked(it) })
 
+
+    //Life cycle functions
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        auth = Firebase.auth
     }
 
     override fun onCreateView(
@@ -31,13 +36,15 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
         return binding?.root
     }
 
+    //Inflater
     override fun inflateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentFriendsBinding = FragmentFriendsBinding.inflate(inflater, container, false)
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = FriendsFragment()
+    private fun onFriendClicked (friend: FriendBO){
+        friend.id?.let { navController.navigate(it) }
+        //adapter.submitList()
     }
+
 }

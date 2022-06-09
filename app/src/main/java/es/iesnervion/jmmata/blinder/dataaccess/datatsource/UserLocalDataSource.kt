@@ -1,7 +1,6 @@
 package es.iesnervion.jmmata.blinder.dataaccess.datatsource
 
 import es.iesnervion.jmmata.blinder.businessObject.UserBO
-import es.iesnervion.jmmata.blinder.dataaccess.local.room.dbo.UserDBO
 
 interface UserLocalDataSource {
 
@@ -9,10 +8,11 @@ interface UserLocalDataSource {
 
     suspend fun getLocalUser(id: String): UserBO
 
-    suspend fun getLocalUserFriendsFrom(id: String): List<UserBO>
+    suspend fun insertLocalUsersList(usersList: List<UserBO>)
 
-    suspend fun isertLocalUsersList(usersList: List<UserBO>)
+    suspend fun insertLocalUser(user: UserBO)
 
-    suspend fun updateLocalUser(user: UserBO)
+    suspend fun deleteLocalUser (id: String)
 
+    suspend fun deleteAllLocalUser()
 }

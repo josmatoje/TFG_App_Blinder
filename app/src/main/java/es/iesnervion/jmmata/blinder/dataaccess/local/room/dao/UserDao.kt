@@ -14,13 +14,15 @@ interface UserDao {
     @Query("SELECT * FROM users WHERE id = :userId")
     suspend fun getUserBy(userId: String): UserDBO
 
-    @Transaction
-    @Query("SELECT friends FROM users WHERE id = :userId")
-    suspend fun getUsersFriendsFrom(userId: String): List<String>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUsersList(userList : List<UserDBO>)
 
-    @Update
-    suspend fun updateUser(user: UserDBO)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUser(userList : UserDBO)
+
+    @Query("DELETE FROM users WHERE id = :userId")
+    suspend fun deleteUser(userId: String)
+
+    @Query("DELETE FROM users")
+    suspend fun deleteAllUser()
 }

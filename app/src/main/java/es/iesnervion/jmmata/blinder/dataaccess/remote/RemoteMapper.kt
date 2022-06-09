@@ -1,37 +1,61 @@
 package es.iesnervion.jmmata.blinder.dataaccess.remote
 
 import android.location.Location
+import com.firebase.geofire.GeoFireUtils
+import com.firebase.geofire.GeoLocation
 import com.google.firebase.firestore.GeoPoint
 import es.iesnervion.jmmata.blinder.businessObject.UserBO
-import es.iesnervion.jmmata.blinder.dataaccess.local.room.dbo.UserDBO
+import es.iesnervion.jmmata.blinder.businessObject.UserMatchBO
 import es.iesnervion.jmmata.blinder.dataaccess.remote.firebase.dto.UserDTO
+import es.iesnervion.jmmata.blinder.dataaccess.remote.firebase.dto.UserMatchDTO
 import java.util.*
+import kotlin.collections.HashMap
+
 
 fun UserDTO.toUserBO(): UserBO {
     val ubicationProvider =  Location("provider")
-    ubicationProvider.latitude = ubication.latitude
-    ubicationProvider.longitude = ubication.longitude
+    ubicationProvider.latitude = ubication?.latitude ?: 37.374183536705715
+    ubicationProvider.longitude = ubication?.longitude ?: -5.9693604649348355
+
     return UserBO(
-        id,
-        userName,
+        null,
+        userName ?: "",
         city ?: "",
         description ?: "",
         birthdate ?: Date(),
         ubicationProvider,
         likes ?: listOf(),
-        friends ?: listOf()
+        sexuality ?: "",
+        gender ?: ""
     )
 }
 
 
-fun UserBO.toUserDTO(): UserDTO =
-    UserDTO(
-        id,
+fun UserBO.toUserDTO(): UserDTO {
+    // Compute the GeoHash for a lat/lng point
+    val lat = location.latitude
+    val lng = location.longitude
+    val hash = GeoFireUtils.getGeoHashForLocation(GeoLocation(lat, lng))
+
+    val ubication: HashMap<String, Any> = hashMapOf(Pair("geohash", hash),Pair("lat", lat),Pair("lng", lng))
+    return UserDTO(
         name,
         city,
         description,
         birthdate,
-        GeoPoint(ubication.latitude, ubication.longitude),
-        likes,
-        friends
+        GeoPoint(lat, lng),
+        likes)
+}
+
+fun UserMatchDTO.toBO(): UserMatchBO =
+    UserMatchBO(
+        null,
+        friendName,
+        isMatch
+    )
+
+fun UserMatchBO.toDTO(): UserMatchDTO =
+    UserMatchDTO(
+        friendName,
+        isMatch
     )

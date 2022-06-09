@@ -17,20 +17,22 @@ fun UserDBO.toUserBO(): UserBO {
         birthdate ?: Date(),
         ubicationProvider,
         likes ?: listOf(),
-        friends ?: listOf()
+        sexuality ?: "",
+        gender ?: ""
     )
 }
 
 
 fun UserBO.toUserDBO(): UserDBO =
     UserDBO(
-        id,
+        id ?: "",
         name,
         city,
         description,
         birthdate,
-        ubication.latitude,
-        ubication.longitude,
+        location.latitude,
+        location.longitude,
         likes,
-        friends
+        gender,
+        sexuality
     )
