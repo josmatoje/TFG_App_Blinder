@@ -2,7 +2,7 @@ package es.iesnervion.jmmata.blinder.dataaccess.datatsource
 
 import es.iesnervion.jmmata.blinder.businessObject.UserBO
 
-interface UserLocalDataSource {
+interface UserLocalDataSource { //Interfaz para ser implementada en una clase LocalDataSource perteneciente a nuestro modelo de bbdd
 
     suspend fun getLocalUsers(): List<UserBO>
 

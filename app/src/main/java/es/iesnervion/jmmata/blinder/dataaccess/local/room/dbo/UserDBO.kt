@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import es.iesnervion.jmmata.blinder.dataaccess.converters.RoomDateConverter
 import java.util.*
-
+//Objeto DataBase Object, para manejar los datos de la bbdd local (Room)
 @Entity(tableName = "users")
 data class UserDBO (
     @PrimaryKey(autoGenerate = false)

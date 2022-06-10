@@ -10,7 +10,7 @@ import es.iesnervion.jmmata.blinder.dataaccess.remote.firebase.dto.UserDTO
 import es.iesnervion.jmmata.blinder.dataaccess.remote.firebase.dto.UserMatchDTO
 import java.util.*
 import kotlin.collections.HashMap
-
+//Métodos para transformar de un objeto DTO a uno BO y viceversa. Facilitan la conversión de objetos de una misma esencia pero adaptando a sus peculiaridades
 
 fun UserDTO.toUserBO(): UserBO {
     val ubicationProvider =  Location("provider")

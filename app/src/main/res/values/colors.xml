@@ -8,13 +8,17 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blueSkyHell">#92FCFF</color>
-    <color name="back_dark_blinder">#18364E</color>
-    <color name="back_blinder">#285A84</color>
+    <color name="back_dark_blinder">#245378</color>
+    <color name="back_blinder">#f3f9ff</color>
     <color name="back_light_blinder">#346C9C</color>
+    <color name="back_light_text">#BC485F73</color>
+    <color name="back_light_textHint">#8071899E</color>
     <color name="back_highlight_blinder">#3981BF</color>
-    <color name="blinder_variant">#ff7851</color>
+    <color name="blinder_variant">#FF663A</color>
+    <color name="blinder_variant_light">#FF9171</color>
     <color name="blinder_like">#4CAF50</color>
     <color name="blinder_dislike">#E83E3E</color>
-    <color name="white_background">#F3F9FF</color>
+    <color name="white_background">#E8E8E8</color>
     <color name="light_gray">#B2BDBDBD</color>
+    <color name="gray_text">#B2737373</color>
 </resources>

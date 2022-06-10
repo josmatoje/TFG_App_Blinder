@@ -6,16 +6,22 @@
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/drawable/ic_baseline_thumb_down_alt_24.xml" value="0.1765" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/font/font.xml" value="0.40572916666666664" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/bottom_bar_menu.xml" value="0.36231884057971014" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/dropdown_list.xml" value="0.17857142857142858" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment__login.xml" value="0.3609375" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_chat_friend.xml" value="0.37552083333333336" />
-        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_friends.xml" value="0.33" />
-        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_login.xml" value="0.35823754789272033" />
-        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_new_login.xml" value="0.33" />
-        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_people.xml" value="0.1" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_edit_personal_data.xml" value="0.3015625" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_friends.xml" value="0.5606531881804043" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_new_login.xml" value="0.25" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_people.xml" value="0.417486971627099" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_profiel_friends.xml" value="0.37552083333333336" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_see_people.xml" value="0.3614583333333333" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/fragment_settings.xml" value="0.3015625" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/row_chat.xml" value="0.31741573033707865" />
+        <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/layout/row_friend.xml" value="0.37552083333333336" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/menu/bottom_bar_menu.xml" value="0.1" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.219" />
         <entry key="..\:/GS DAM/Repositorios/TFG_App_Blinder/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.219" />
@@ -27,5 +33,10 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SwUserDefinedSpecifications">
+    <option name="specTypeByUrl">
+      <map />
+    </option>
   </component>
 </project>

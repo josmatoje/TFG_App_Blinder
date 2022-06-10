@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="5dp"
+    android:elevation="5dp"
+    app:cardCornerRadius="10dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/freindName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:textSize="18dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/blinder_variant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Nombre" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipLike1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Like 1"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/freindName" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipLike2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Like 2"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/chipLike1"
+            app:layout_constraintTop_toBottomOf="@+id/freindName" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipLike3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Like 3"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/chipLike2"
+            app:layout_constraintTop_toBottomOf="@+id/freindName" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipLike4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/chipLike3"
+            app:layout_constraintTop_toBottomOf="@+id/freindName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

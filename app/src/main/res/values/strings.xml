@@ -1,11 +1,39 @@
 <resources>
     <string name="app_name">Blinder</string>
-    <string name="no_tienes_cuenta_registrate_aqu_mismo">¿No tienes cuenta? Registrate aquí mismo</string>
+    <string name="no_tienes_cuenta_registrate_aqu_mismo">Registrate</string>
     <string name="nombre">Nombre:</string>
     <string name="descripci_n">Descripción:</string>
     <string name="usuario">Usuario</string>
     <string name="contrase_a">Contraseña</string>
     <string name="entra">ENTRAR</string>
     <string name="blinder">Blinder</string>
-    <string name="intereses"><u>Intereses:</u></string>
+    <string name="intereses">Intereses:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="forgetPassword_Link">¿Olvidaste tu contraseña? <u>Pincha aquí para recuperarla.</u></string>
+
+    <string-array name="genders">
+        <item>Mujer (Cis)</item>
+        <item>Hombre (Cis)</item>
+        <item>Mujer (Trans)</item>
+        <item>Hombre (Trans)</item>
+        <item>No binario</item>
+        <item>Prefiero no contestar</item>
+        <item>Otros</item>
+    </string-array>
+    <string-array name="sexuality">
+        <item>Heterosexual</item>
+        <item>HomoSexual</item>
+        <item>Bisexual</item>
+        <item>Pansexual</item>
+        <item>Polisexual</item>
+        <item>Antrosexual</item>
+        <item>Demisexual</item>
+        <item>Asexual</item>
+        <item>Prefiero no contestar</item>
+        <item>Otros</item>
+    </string-array>
+    <string-array name="likes">
+        <item>Cerveza</item>
+    </string-array>
 </resources>

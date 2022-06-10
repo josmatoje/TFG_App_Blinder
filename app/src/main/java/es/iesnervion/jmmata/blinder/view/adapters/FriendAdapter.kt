@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import es.iesnervion.jmmata.blinder.R
 import es.iesnervion.jmmata.blinder.businessObject.FriendBO
 import es.iesnervion.jmmata.blinder.databinding.RowChatBinding
+import es.iesnervion.jmmata.blinder.databinding.RowFriendBinding
 
 class FriendAdapter (private val onFriendSelectedListener : (FriendBO)-> Unit):
     ListAdapter<FriendBO, FriendAdapter.FriendViewHolder>(UserDiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.row_chat, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.row_friend, parent, false)
         return FriendViewHolder(view)
     }
 
@@ -23,7 +24,7 @@ class FriendAdapter (private val onFriendSelectedListener : (FriendBO)-> Unit):
     }
 
     inner class FriendViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = RowChatBinding.bind(view)
+        val binding = RowFriendBinding.bind(view)
     }
 }
 
@@ -35,8 +36,12 @@ object UserDiffCallback : DiffUtil.ItemCallback<FriendBO>() {
         oldItem == newItem
 }
 
-private fun RowChatBinding.bind(friend: FriendBO, onFriendSelectedListener: (FriendBO) -> Unit){
+private fun RowFriendBinding.bind(friend: FriendBO, onFriendSelectedListener: (FriendBO) -> Unit){
     root.setOnClickListener { onFriendSelectedListener(friend) }
-    chatUserName.text = friend.friendName
+    freindName.text = friend.friendName
+    chipLike1.text = friend.likes[0]
+    chipLike2.text = friend.likes[1]
+    chipLike3.text = friend.likes[2]
+    chipLike4.text = friend.likes[3]
     //TODO:
 }

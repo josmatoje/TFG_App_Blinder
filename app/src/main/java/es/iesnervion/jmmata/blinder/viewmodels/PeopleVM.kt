@@ -54,7 +54,7 @@ class PeopleVM : ViewModel() {
         if (position >= users.size) {
             users = emptyList()
         }
-        if (users.isEmpty()){
+        if (users.isEmpty()){ //Si position es 0 pero el listado es empty (No hay mas usuarios)
             getUsers()
         } else {
             _userPresented.postValue(users[position])
@@ -65,19 +65,23 @@ class PeopleVM : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             userPresented.value?.let { it ->
                 insertMatchUseCase.invoke(UserMatchBO(it.id, it.name, match))
+                position++
             }
-            do {
+            loadUser()
+        }
+    }
+    //TODO: delete
+/*            do {
                 position++
             } while (position<users.size &&
                 (getFriendsFromActualUserUseCase.invoke().map { it.id }
                     .contains(users[position].id) ||
                 getFriendsFromActualUserUseCase.invoke().map { it.id }
                     .contains(Firebase.auth.uid ?: ""))
-            ) //TODO: try to optimize at least in on invoke
-            loadUser()
-        }
-    }
+            ) //TODO: try to optimize at least in on invoke*/
 
+    //Private functions
+    /*Recibe los usuarios con los que no se ha interactuado aun matches y filtra según condiciones*/
     private fun getUsers(){
         val userList: ArrayList<UserBO> = ArrayList()
         var userDocument: UserBO
@@ -86,7 +90,7 @@ class PeopleVM : ViewModel() {
             userMatches = getMatchesUseCase.invoke(auth.uid ?: "")
             getUsersUseCase.invoke{ document ->
                 for (user in document){
-                    if (!userMatches.map { it.id }.contains(user.id)){
+                    if (!(userMatches.map { it.id }.contains(user.id) && userMatches.map { it.id }.contains(auth.uid))){
                         userDocument = user.toObject<UserDTO>().toUserBO()
                         userDocument.id = user.id
                         userList.add(userDocument)
@@ -96,16 +100,11 @@ class PeopleVM : ViewModel() {
                 position = 0
                 if (userList.isNotEmpty()) {
                     _userPresented.postValue(userList[position])
-                }
-                else {
-                    //TODO: Mostrar pantalla de "No hay usuarios"
+                }else {
+                    _userPresented.postValue(UserBO())
                 }
             }
         }
-    }
-
-    private fun discardMatches(){
-
     }
 
 }

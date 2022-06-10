@@ -5,6 +5,7 @@ import com.google.firebase.firestore.GeoPoint
 import java.util.*
 import kotlin.collections.HashMap
 
+//Modelo Data Transfer Object, para recibir los datos de la bbdd de firebase
 data class UserDTO(
     val userName: String? = null,
     val city: String? = null,

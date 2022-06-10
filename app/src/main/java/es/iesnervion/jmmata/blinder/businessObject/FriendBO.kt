@@ -1,7 +1,9 @@
 package es.iesnervion.jmmata.blinder.businessObject
 
+import java.util.ArrayList
+
 data class FriendBO (
-    var id: String?,
+    var id: String? = null,
     val friendName: String = "",
-    val isMatch: Boolean = false
+    val likes: List<String> = ArrayList()
 )

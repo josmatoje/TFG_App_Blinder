@@ -34,11 +34,30 @@
         <argument
             android:name="tokenLoged"
             app:argType="string"
-            android:defaultValue="SDOS" />
+            android:defaultValue="id" />
     </fragment>
     <fragment
         android:id="@+id/friendsFragment"
         android:name="es.iesnervion.jmmata.blinder.view.fragments.FriendsFragment"
         android:label="fragment_friends"
-        tools:layout="@layout/fragment_friends" />
+        tools:layout="@layout/fragment_friends" >
+        <action
+            android:id="@+id/navigateToProfielFriendsFragment"
+            app:destination="@id/profielFriendsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profielFriendsFragment"
+        android:name="es.iesnervion.jmmata.blinder.view.fragments.ProfielFriendsFragment"
+        android:label="fragment_profiel_friends"
+        tools:layout="@layout/fragment_profiel_friends" >
+        <argument
+            android:name="idProfile"
+            app:argType="string"
+            android:defaultValue="id" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPersonalDataFragment"
+        android:name="es.iesnervion.jmmata.blinder.view.fragments.EditPersonalDataFragment"
+        android:label="fragment_edit_personal_data"
+        tools:layout="@layout/fragment_edit_personal_data" />
 </navigation>

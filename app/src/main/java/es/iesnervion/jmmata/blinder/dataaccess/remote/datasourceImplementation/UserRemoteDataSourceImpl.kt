@@ -1,30 +1,36 @@
 package es.iesnervion.jmmata.blinder.dataaccess.remote.datasourceImplementation
 
-import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import es.iesnervion.jmmata.blinder.businessObject.FriendBO
 import es.iesnervion.jmmata.blinder.businessObject.UserBO
 import es.iesnervion.jmmata.blinder.businessObject.UserMatchBO
 import es.iesnervion.jmmata.blinder.dataaccess.datatsource.UserRemoteDataSource
-import es.iesnervion.jmmata.blinder.dataaccess.remote.firebase.dto.FriendDTO
-import es.iesnervion.jmmata.blinder.dataaccess.remote.firebase.dto.UserDTO
 import es.iesnervion.jmmata.blinder.dataaccess.remote.firebase.dto.UserMatchDTO
 import es.iesnervion.jmmata.blinder.dataaccess.remote.toBO
 import es.iesnervion.jmmata.blinder.dataaccess.remote.toDTO
-import es.iesnervion.jmmata.blinder.dataaccess.remote.toUserBO
 import es.iesnervion.jmmata.blinder.dataaccess.remote.toUserDTO
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class UserRemoteDataSourceImpl: UserRemoteDataSource {
+class UserRemoteDataSourceImpl: UserRemoteDataSource { //Clase que realiza llamadas a firebase. En la mayoria de casos se devuelven
+// objetos BO que son los que usa la aplicación.
 
+    //Variables
     private var db = Firebase.firestore
-    private var auth: FirebaseAuth = Firebase.auth
+    private var auth = Firebase.auth
+    private var authId = Firebase.auth.uid ?: ""
 
+
+    /*Descripción: devuelve el listado de usuarios de la base de datos de firebase como parámetro a la función (o tarea) que se le pasa por
+    parámetros a esta función.*/
     override suspend fun getRemoteUsers(afterAction:(QuerySnapshot)->Unit) {
         db  .collection("Users")
             .get()
@@ -33,25 +39,7 @@ class UserRemoteDataSourceImpl: UserRemoteDataSource {
             }.await()
     }
 
-    override suspend fun getRemoteUsersFriends(): List<UserBO> {
-        val friends = ArrayList<UserBO>()
-        var userDocument: UserBO
-        getRemoteUsers { document ->
-            for (user in document){
-                userDocument = user.toObject<UserDTO>().toUserBO()
-                userDocument.id = user.id
-                friends.add(userDocument)
-            }
-        }
-        try{
-            friends.filter { it.id?.let { id -> getFriendship(id) } == true }
-        }catch (e: NoSuchElementException){ }
-        finally {
-            return friends
-        }
-    }
-
-
+    /*Descripción: devuelve un usuario de firebase correspondiente al id pasado por parametros*/
     override suspend fun getRemoteUser(id: String): UserBO {
         var user = UserBO()
         db.collection("Users")
@@ -59,20 +47,58 @@ class UserRemoteDataSourceImpl: UserRemoteDataSource {
             .get()
             .addOnSuccessListener {
                 user = it.toObject<UserBO>() ?: UserBO()
-            }
+            }.await()
         return user
     }
 
+    /*Descripción: metodo que llama a firebase y recoge el listado de documentos de amigos del usuario registrado y los pasa como parámetros a la
+    función (o tarea) que se recibe por parámetros.*/
+    override suspend fun getRemoteUsersFriends(afterAction:(QuerySnapshot)->Unit) {
+        db.collection("Users")
+            .document(authId)
+            .collection("UserMatches")
+            .get()
+            .addOnSuccessListener {
+                afterAction(it)
+                /*GlobalScope.launch(Dispatchers.IO) {
+                    collection.filter { getFriendship(it.id) }
+                                .map { getRemoteFriend(it.id) }
+                }*/
+            }.await()
+    }
 
+    /*Descripción: método que llama a firebase y recoge un amigos del usuario registrado indicado por el id que recibe y lo pasa como parámetros
+    a la función (o tarea) que se recibe por parámetros.*/
+    override suspend fun getRemoteFriend(id: String, afterAction:(FriendBO)->Unit) {
+        var friend = FriendBO()
+        db.collection("Users")
+            .document(id)
+            .get()
+            .addOnSuccessListener {
+                friend = it.toObject<FriendBO>() ?: FriendBO()
+                afterAction(friend)
+            }.await()
+    }
 
-    override suspend fun createAuthUser(email: String, password: String) {
+/*
+
+    override suspend fun getRemoteFriend(id: String): FriendBO {
+        var friend = FriendBO()
+        db.collection("Users")
+            .document(id)
+            .get()
+            .addOnSuccessListener {
+                friend = it.toObject<FriendBO>() ?: FriendBO()
+            }.await()
+        return friend
+    }
+*/
+
+    override suspend fun createAuthUser(email: String, password: String, afterAction:(Task<AuthResult>)->Unit) {
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    //TODO: add boolean to indicate the state of the insertion
-                }
-            }
+            .addOnCompleteListener {
+                afterAction(it)
+            }.await()
     }
 
     override suspend fun insertRemoteUser( user: UserBO) {
@@ -86,17 +112,13 @@ class UserRemoteDataSourceImpl: UserRemoteDataSource {
     }
 
     override suspend fun insertRemoteMatch(userMatch: UserMatchBO) {
-        auth.uid?.let{ authId ->
-            userMatch.id?.let { id ->
-                db.collection("Users")
-                    .document(authId)
-                    .collection("UserMatches")
-                    .document(id)
-                    .set(userMatch.toDTO())
-            }//TODO: DTO no almacena el id
-        }
-
-
+        userMatch.id?.let { id ->
+            db.collection("Users")
+                .document(authId)
+                .collection("UserMatches")
+                .document(id)
+                .set(userMatch.toDTO())
+        }//TODO: DTO no almacena el id
     }
 
     override suspend fun updateDescriptionRemoteUser(userId: String, newDescription: String): Boolean {
@@ -119,27 +141,38 @@ class UserRemoteDataSourceImpl: UserRemoteDataSource {
         return emptyList() //TODO: implement filter
     }
 
-
-
-    override suspend fun getmatchesFrom(id: String): List<UserMatchBO> {
+    override suspend fun getMatchesFrom(id: String): List<UserMatchBO> {
         val userList: ArrayList<UserMatchBO> =  ArrayList()
+        var auxUserMatch: UserMatchBO
         db.collection("Users")
             .document(id)
             .collection("UserMatches")
             .get()
             .addOnSuccessListener { document ->
                 for (userMatch in document){
-                    userList.add(userMatch.toObject<UserMatchDTO>().toBO())
+                    auxUserMatch = userMatch.toObject<UserMatchDTO>().toBO()
+                    auxUserMatch.id = userMatch.id
+                    userList.add(auxUserMatch)
                 }
             }.await()
         return userList
     }
 
-    @Throws( NoSuchElementException::class)
-    override suspend fun getFriendship(friendId: String): Boolean  =
-        if (getmatchesFrom(auth.uid ?: "").first { it.id == friendId }.isMatch == true){
-            getmatchesFrom(friendId).first { it.id == auth.uid ?: "" }.isMatch == true
-        } else false
+    override suspend fun getFriendship(friendId: String): Boolean {
+        var friends: List<UserMatchBO>
+        var isFriend = false
+
+        GlobalScope.launch(Dispatchers.IO) {
+            friends = getMatchesFrom(authId)
+             isFriend = if (friends.isNotEmpty() &&
+                 friends.firstOrNull() { it.id == friendId }?.isMatch == true) {
+                friends = getMatchesFrom(friendId)
+                friends.isNotEmpty() &&
+                    friends.firstOrNull { it.id == authId }?.isMatch == true
+            } else false
+        }
+        return isFriend
+    }
 
     override suspend fun deleteRemoteFriendship(userId: String) {
         db.collection("Users")
@@ -148,5 +181,6 @@ class UserRemoteDataSourceImpl: UserRemoteDataSource {
             .document(userId)
             .delete()
     }
+
 
 }

@@ -1,11 +1,14 @@
 package es.iesnervion.jmmata.blinder.view.fragments
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -25,6 +28,7 @@ import es.iesnervion.jmmata.blinder.dataaccess.remote.toUserBO
 import es.iesnervion.jmmata.blinder.view.base.BaseFragment
 import es.iesnervion.jmmata.blinder.databinding.FragmentPeopleBinding
 import es.iesnervion.jmmata.blinder.viewmodels.PeopleVM
+import java.util.*
 import kotlin.collections.ArrayList
 
 class PeopleFragment : BaseFragment<FragmentPeopleBinding>() {
@@ -34,7 +38,7 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>() {
     private var auth: FirebaseAuth= Firebase.auth
     private val db = Firebase.firestore
     private val args: PeopleFragmentArgs by navArgs() //Argument from another fragment
-    private val viewModel: PeopleVM by activityViewModels()
+    private val viewModel: PeopleVM by viewModels()
 
     //life cycle functions
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,18 +51,18 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>() {
     ): View? {
         // Inflate the layout for this fragment
         binding = inflateViewBinding(inflater, container)
-        return binding?.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupVMObservers()
         binding?.peopleMatbtnDislike?.setOnClickListener {
             viewModel.isAMatch(false)
         }
         binding?.peopleMatbtnLike?.setOnClickListener {
             viewModel.isAMatch(true)
         }
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupVMObservers()
         viewModel.loadUser()
     }
 
@@ -77,24 +81,53 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>() {
     //private methods
     private fun setupVMObservers() {
         viewModel.userPresented.observe(viewLifecycleOwner) {
-            setText(it)
+            if(it.equals(UserBO()))
+                noMoreUsers()
+            else
+                setText(it)
         }
     }
 
+    /*Actualiza los labels con los datos del usuario que se quiere mostrar y actualiza la visibilidad de los tags para que muestre los necesarios */
     private fun setText(user: UserBO) {
         binding?.apply {
-
+            val tags: List<TextView> = listOf(tagGustos, tagGustos1, tagGustos2, tagGustos3, tagGustos4)
+            var i = 0
+            peopleMainLayout.visibility = View.VISIBLE
             peopleLabelName.text = user.name
             peopleLabelCity.text = "Vive en, " + user.city
-            peopleLabelAge.text = "27" //TODO: poner edad real
-            tagGustos.text = if(user.likes.isNotEmpty()) user.likes[0] else ""
-            tagGustos1.text = if(user.likes.size > 1) user.likes[1] else ""
-            tagGustos2.text = if(user.likes.size > 2) user.likes[2] else ""
-            tagGustos3.text = if(user.likes.size > 3) user.likes[3] else ""
-            tagGustos4.text = if(user.likes.size > 4) user.likes[4] else ""
+            peopleLabelAge.text = getYears(user.birthdate).toString()+" años"
+            while (i < tags.size ){
+                if(user.likes.isNotEmpty() &&  i < user.likes.size ) {
+                    tags[i].visibility = View.VISIBLE
+                    tags[i].text = user.likes[i]
+                } else {
+                    tags[i].visibility = View.GONE
+                }
+                i++
+            }
             peopleLabelDescription.text = user.description
+            friendSeparatorEmpty.visibility = View.GONE
+            peopleEmpty.visibility = View.GONE
         }
+    }
+    /*Oculta los placeholders de los labels en el caso de que no haya más usuarios que mostrar*/
+    private fun noMoreUsers() {
+        binding?.apply {
+            peopleMainLayout.visibility = View.GONE
+            friendSeparatorEmpty.visibility = View.VISIBLE
+            peopleEmpty.visibility = View.VISIBLE
+        }
+    }
 
+    /*Metodo que calcula la edad en función de una fecha de nacimiento*/
+    private fun getYears(birthdate: Date): Int {
+        var years = Date().year - birthdate.year
+        if(Date().month < birthdate.month ||
+            Date().month == birthdate.month && Date().day < birthdate.day){
+            years--
+        }
+        return years
     }
 
 }

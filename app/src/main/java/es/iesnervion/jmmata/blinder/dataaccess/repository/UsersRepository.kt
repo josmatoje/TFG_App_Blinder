@@ -1,12 +1,17 @@
 package es.iesnervion.jmmata.blinder.dataaccess.repository
 
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.ktx.Firebase
+import es.iesnervion.jmmata.blinder.businessObject.FriendBO
 import es.iesnervion.jmmata.blinder.businessObject.UserBO
 import es.iesnervion.jmmata.blinder.businessObject.UserMatchBO
 import es.iesnervion.jmmata.blinder.dataaccess.datatsource.UserLocalDataSource
 import es.iesnervion.jmmata.blinder.dataaccess.datatsource.UserRemoteDataSource
 import kotlinx.coroutines.Dispatchers
-
+/*Clase repositorio que recoge los metodos de manera genérica e implementa un datasource local o remoto en función de como desee tratar los datos*/
 class UsersRepository(
     private val userRemoteDataSource: UserRemoteDataSource,
     private val userLocalDataSource: UserLocalDataSource
@@ -27,30 +32,22 @@ class UsersRepository(
         userRemoteDataSource.getRemoteUsersFilterBy(gender, sexuality, proximity, older, younger, likes)
 
 
-    suspend fun getFriendsFromActualUser(): List<UserBO> = //{
-        //var users = userLocalDataSource.getLocalUsers()
-        //if(users.isEmpty()) {
-            //users =
-                userRemoteDataSource.getRemoteUsersFriends()
-            //userLocalDataSource.insertLocalUsersList(users)
-        //}
-        //return users
-    //}
+    suspend fun getFriendsFromActualUser(afterAction:(QuerySnapshot)->Unit) =
+        userRemoteDataSource.getRemoteUsersFriends(afterAction)
 
-    suspend fun getFriendFromActualUser(id: String): UserBO =
-        //userLocalDataSource.getLocalUser(id)
-        userRemoteDataSource.getRemoteUsersFriends().first { it.id == id }
+    suspend fun getFriendFrom(id: String, afterAction:(FriendBO)->Unit){
+        userRemoteDataSource.getRemoteFriend(id, afterAction)
+    }
 
-
-    suspend fun getMatchessFrom(id: String): List<UserMatchBO> =
-        userRemoteDataSource.getmatchesFrom(id)
+    suspend fun getMatchesFrom(id: String): List<UserMatchBO> =
+        userRemoteDataSource.getMatchesFrom(id)
 
     suspend fun isFriendship(friendId: String): Boolean =
         userRemoteDataSource.getFriendship(friendId)
 
     //Inserts
-    suspend fun createtUserAuth(email: String, password: String) =
-        userRemoteDataSource.createAuthUser(email, password)
+    suspend fun createtUserAuth(email: String, password: String, afterAction:(Task<AuthResult>)->Unit) =
+        userRemoteDataSource.createAuthUser(email, password, afterAction)
 
     suspend fun insertUser(user: UserBO) =
         userRemoteDataSource.insertRemoteUser(user)
@@ -63,8 +60,8 @@ class UsersRepository(
         }*/
     }
 
-    suspend fun insertFriendsOnLocal(usersList: List<UserBO>) =
-        userLocalDataSource.insertLocalUsersList(usersList)
+    //suspend fun insertFriendsOnLocal(usersList: List<UserBO>) =
+        //userLocalDataSource.insertLocalUsersList(usersList)
 
     //Updates
     suspend fun updateUserDescription(user: UserBO): Boolean {

@@ -14,7 +14,6 @@ import es.iesnervion.jmmata.blinder.view.base.BaseFragment
 class ChatFriendFragment : BaseFragment<FragmentChatFriendBinding>() {
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

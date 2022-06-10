@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/white_background">
+        android:background="@color/back_blinder">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,8 +24,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Amigos"
+                android:text="Mis amistades"
                 android:textSize="26dp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/blinder_variant"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,23 +35,29 @@
 
             <ImageView
                 android:id="@+id/friends_img_iconLogo"
-                android:src="@drawable/blinder_icon_700x700_white_background"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:src="@drawable/blinder_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_margin="10dp"/>
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/friendsFragmentListOfChats"
+            android:id="@+id/friendsFragmentListOfFriends"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white_background"
+            android:background="@color/back_blinder"
             android:padding="3dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/row_chat"/>
+            tools:listitem="@layout/row_friend"/>
 
     </LinearLayout>
 

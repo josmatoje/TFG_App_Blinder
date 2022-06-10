@@ -22,6 +22,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private lateinit var auth: FirebaseAuth
     private val viewModel: LoginVM by viewModels()
 
+    //Funciones ciclo de vida
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
@@ -44,8 +45,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
+            //Bindeo del boton para ir al newLogin
             loginMatButNewLogin.setOnClickListener{ navController.navigate(R.id.navigateToNewLogin) }
-
+            //Bindeo del boton para logearte
             loginMatButUser.setOnClickListener {
                 // if(binding?.etName?.text?.is?NotBlank():false)
                 if (etName.text?.isNotBlank() == true && etPassword.text?.isNotBlank() == true) { //Recomended by android (Bolean? could have three values)
@@ -56,6 +58,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     }
                 }
             }
+            //Bindeo del boton para cambiar contraseña
             forgetPassword.setOnClickListener {
                 binding?.etName?.text.toString().let {
                     if(it.isEmpty()){
@@ -68,6 +71,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
     }
 
+    //Metodos privados
+    /*Metodo que intenta loguear a un email con contraseña y en caso de poder realiza una navegación
+    * */
     private fun signIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -83,6 +89,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
     }
 
+    /*Metodo que envia un correo de recuperación de contraseña a un usuario que indique su correo electrónico*/
     private fun forgotPassword(email: String) {
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
@@ -94,14 +101,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
     }
 
-    private fun sendEmailVerification() {
-        val user = auth.currentUser
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener {
-                Toast.makeText(context, "Correo enviado, compruebe su bandeja de entrada.", Toast.LENGTH_LONG).show()
-            }
-    }
 
+    //Inflater
     override fun inflateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?

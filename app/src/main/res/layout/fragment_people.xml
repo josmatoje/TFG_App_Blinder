@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragments.PeopleFragment"
-    android:background="@color/white_background">
+    android:background="@color/back_blinder">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,172 +13,215 @@
 
         <ImageView
             android:id="@+id/people_img_iconLogo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:src="@drawable/blinder_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:src="@drawable/blinder_icon_700x700_white_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/people_label_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/peopleMainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/people_img_iconLogo">
+
+            <TextView
+                android:id="@+id/people_label_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="20dp"
+                android:text="Nombre Apellidos"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/blinder_variant"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/people_label_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Vive en, Sevilla"
+                android:fontFamily="@font/nunito_light"
+                android:textColor="@color/blinder_variant"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="@id/people_label_name"
+                app:layout_constraintTop_toBottomOf="@id/people_label_name" />
+
+            <TextView
+                android:id="@+id/people_label_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:text="27 años"
+                android:fontFamily="@font/nunito_light"
+                android:textColor="@color/blinder_variant"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="@id/people_label_description"
+                app:layout_constraintTop_toTopOf="@id/people_label_city" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/friendSeparator"
+                app:layout_constraintTop_toBottomOf="@id/people_label_city"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dividerColor="@color/light_gray"/>
+
+            <TextView
+                android:id="@+id/people_label_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:text="Descripcion larga Descr ipcion larga Descrip cion larga Descripci on larga Descripcion larga "
+                android:fontFamily="@font/nunito_light"
+                android:textColor="@color/blinder_variant"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/people_label_city" />
+
+            <TextView
+                android:id="@+id/people_label_tags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/intereses"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/back_light_blinder"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/people_label_description" />
+
+            <TextView
+                android:id="@+id/tagGustos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/back_light_blinder"
+                android:padding="5dp"
+                android:text="Croquetas y otras comidas"
+                android:textColor="@color/white_background"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/people_label_description"
+                app:layout_constraintTop_toBottomOf="@id/people_label_tags" />
+
+            <TextView
+                android:id="@+id/tagGustos1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@color/back_light_blinder"
+                android:padding="5dp"
+                android:text="Android"
+                android:textColor="@color/white_background"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tagGustos"
+                app:layout_constraintTop_toTopOf="@id/tagGustos" />
+
+            <TextView
+                android:id="@+id/tagGustos2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/back_light_blinder"
+                android:padding="5dp"
+                android:text="Cervezas"
+                android:textColor="@color/white_background"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/people_label_description"
+                app:layout_constraintTop_toBottomOf="@id/tagGustos" />
+
+            <TextView
+                android:id="@+id/tagGustos3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@color/back_light_blinder"
+                android:padding="5dp"
+                android:text="UWP"
+                android:textColor="@color/white_background"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tagGustos2"
+                app:layout_constraintTop_toBottomOf="@id/tagGustos" />
+
+            <TextView
+                android:id="@+id/tagGustos4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@color/back_light_blinder"
+                android:padding="5dp"
+                android:text="Fernando te quiero"
+                android:textColor="@color/white_background"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tagGustos3"
+                app:layout_constraintTop_toBottomOf="@id/tagGustos" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/people_matbtn_dislike"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:backgroundTint="@color/blinder_dislike"
+                android:text="NO GUSTA"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_baseline_thumb_down_alt_24"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/people_matbtn_like"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/people_matbtn_like"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:backgroundTint="@color/blinder_like"
+                android:text="GUSTA"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_baseline_thumb_up_alt_24"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/people_matbtn_dislike" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/friendSeparatorEmpty"
+            app:layout_constraintTop_toBottomOf="@id/people_img_iconLogo"
             android:layout_margin="20dp"
-            android:background="@color/white_background"
-            android:text="Nombre Apellidos"
-            android:textColor="@color/blinder_variant"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/people_img_iconLogo" />
-
-        <TextView
-            android:id="@+id/people_label_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/white_background"
-            android:text="Vive en, Sevilla"
-            android:textColor="@color/blinder_variant"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="@id/people_label_name"
-            app:layout_constraintTop_toBottomOf="@id/people_label_name" />
-
-        <TextView
-            android:id="@+id/people_label_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:background="@color/white_background"
-            android:text="27 años"
-            android:textColor="@color/blinder_variant"
-            android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="@id/people_label_description"
-            app:layout_constraintTop_toTopOf="@id/people_label_city" />
-
-        <TextView
-            android:id="@+id/people_label_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="35dp"
-            android:text="Descripcion larga Descr ipcion larga Descrip cion larga Descripci on larga Descripcion larga "
-            android:textColor="@color/blinder_variant"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/people_label_name"
-            app:layout_constraintTop_toBottomOf="@id/people_label_city" />
+            android:visibility="gone"
+            app:dividerColor="@color/light_gray"/>
 
         <TextView
-            android:id="@+id/people_label_tags"
+            android:id="@+id/peopleEmpty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="@string/intereses"
-            android:textStyle="bold"
+            android:layout_margin="30dp"
+            android:paddingHorizontal="20dp"
+            android:textAlignment="center"
+            android:text="La lista está vacia. Avisa a tus amigos para que se registren en Blinder y tambien puedan conocer a más gente interesante."
+            android:fontFamily="@font/nunito_bold"
             android:textColor="@color/back_light_blinder"
-            android:textSize="20sp"
+            android:textSize="24sp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/people_label_description" />
-
-        <TextView
-            android:id="@+id/tagGustos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/back_light_blinder"
-            android:padding="5dp"
-            android:text="Croquetas y otras comidas"
-            android:textColor="@color/white_background"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/people_label_description"
-            app:layout_constraintTop_toBottomOf="@id/people_label_tags" />
-
-        <TextView
-            android:id="@+id/tagGustos1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:background="@color/back_light_blinder"
-            android:padding="5dp"
-            android:text="Android"
-            android:textColor="@color/white_background"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/tagGustos"
-            app:layout_constraintTop_toTopOf="@id/tagGustos" />
-
-        <TextView
-            android:id="@+id/tagGustos2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/back_light_blinder"
-            android:padding="5dp"
-            android:text="Cervezas"
-            android:textColor="@color/white_background"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/people_label_description"
-            app:layout_constraintTop_toBottomOf="@id/tagGustos" />
-
-        <TextView
-            android:id="@+id/tagGustos3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@color/back_light_blinder"
-            android:padding="5dp"
-            android:text="UWP"
-            android:textColor="@color/white_background"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/tagGustos2"
-            app:layout_constraintTop_toBottomOf="@id/tagGustos" />
-
-        <TextView
-            android:id="@+id/tagGustos4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@color/back_light_blinder"
-            android:padding="5dp"
-            android:text="Fernando te quiero"
-            android:textColor="@color/white_background"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/tagGustos3"
-            app:layout_constraintTop_toBottomOf="@id/tagGustos" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/people_matbtn_dislike"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:backgroundTint="@color/blinder_dislike"
-            android:text="NO GUSTA"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            app:icon="@drawable/ic_baseline_thumb_down_alt_24"
-            app:iconTint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/people_matbtn_like"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/people_matbtn_like"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:backgroundTint="@color/blinder_like"
-            android:text="GUSTA"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:icon="@drawable/ic_baseline_thumb_up_alt_24"
-            app:iconTint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/people_matbtn_dislike" />
+            app:layout_constraintTop_toTopOf="@id/friendSeparatorEmpty"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

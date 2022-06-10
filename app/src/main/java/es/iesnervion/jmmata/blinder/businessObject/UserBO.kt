@@ -1,7 +1,6 @@
 package es.iesnervion.jmmata.blinder.businessObject
 
 import android.location.Location
-import com.google.firebase.firestore.DocumentReference
 import java.util.*
 
 data class UserBO (
@@ -14,5 +13,19 @@ data class UserBO (
     val likes: List<String> = ArrayList(),
     val sexuality: String = "",
     val gender: String = "",
-    val friends: List<UserMatchBO> = ArrayList()
-)
+    val friends: List<UserMatchBO> = ArrayList()) {
+
+    override fun equals(obj: Any?): Boolean {
+        var isEqual = false
+        if (this === obj) {
+            isEqual = true
+        }else if (obj == null || javaClass != obj.javaClass) {
+            isEqual = false
+        }else if ((obj as UserBO).id.equals(this.id)) {
+            isEqual = true
+        }
+        return isEqual
+    }
+}
+
+
