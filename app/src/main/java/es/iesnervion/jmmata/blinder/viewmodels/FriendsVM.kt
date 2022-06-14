@@ -41,7 +41,7 @@ class FriendsVM : ViewModel() {
     //Public functions
     /*Carga el listado de amigos del usuario (amigo es que ambos usuarios se hayan dado like)*/
     fun loadFriends(){
-        viewModelScope.launch(Dispatchers.IO) {
+/*        viewModelScope.launch(Dispatchers.IO) {
             getFriendsFromActualUserUseCase() { usermatches ->
                 val auxFriend: MutableList<FriendBO> = ArrayList()
                 viewModelScope.launch(Dispatchers.IO) {
@@ -53,8 +53,14 @@ class FriendsVM : ViewModel() {
                             }
                 }
             }
-        }
-        //
+        }*/
+        val falseFriends = setOf(
+            FriendBO("000", "Fernando lo siento", setOf("UWP", "Xamarin", "ASP.NET").toList()),
+            FriendBO("000", "iOS enjoyer", setOf("SwiftUI", "iPhone10").toList()),
+            FriendBO("000", "La mamá de Pedro", setOf("Fernando", "Bless You", "Kayak", "Extras").toList()),
+            FriendBO("000", "Josema", setOf("Aprobar").toList())
+            ).toList()
+        _friendsList.postValue(falseFriends)
     }
 
 }

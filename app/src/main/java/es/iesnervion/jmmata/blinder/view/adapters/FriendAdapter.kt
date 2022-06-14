@@ -1,5 +1,6 @@
 package es.iesnervion.jmmata.blinder.view.adapters
 
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,9 +40,36 @@ object UserDiffCallback : DiffUtil.ItemCallback<FriendBO>() {
 private fun RowFriendBinding.bind(friend: FriendBO, onFriendSelectedListener: (FriendBO) -> Unit){
     root.setOnClickListener { onFriendSelectedListener(friend) }
     freindName.text = friend.friendName
-    chipLike1.text = friend.likes[0]
-    chipLike2.text = friend.likes[1]
-    chipLike3.text = friend.likes[2]
-    chipLike4.text = friend.likes[3]
-    //TODO:
+   when(friend.likes.size) {
+        0 -> {
+            chipLike4.visibility = View.GONE
+            chipLike3.visibility = View.GONE
+            chipLike2.visibility = View.GONE
+            chipLike1.visibility = View.GONE
+        }
+       1 -> {
+           chipLike4.visibility = View.GONE
+           chipLike3.visibility = View.GONE
+           chipLike2.visibility = View.GONE
+           chipLike1.text = friend.likes[0]
+       }
+       2 -> {
+           chipLike4.visibility = View.GONE
+           chipLike3.visibility = View.GONE
+           chipLike2.text = friend.likes[1]
+           chipLike1.text = friend.likes[0]
+       }
+       3 -> {
+           chipLike4.visibility = View.GONE
+           chipLike3.text = friend.likes[2]
+           chipLike2.text = friend.likes[1]
+           chipLike1.text = friend.likes[0]
+       }
+        else -> {
+            chipLike4.visibility = View.VISIBLE
+            chipLike3.text = friend.likes[2]
+            chipLike2.text = friend.likes[1]
+            chipLike1.text = friend.likes[0]
+        }
+    }
 }

@@ -43,7 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="xemita95@gmail.com"
                 android:textColor="@color/back_light_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,7 +67,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:text="123456"
                 android:textColor="@color/back_light_text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
